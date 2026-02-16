@@ -1,0 +1,79 @@
+{
+  "Landing": {
+    "Navbar": {
+      "sale": "Venta",
+      "rent": "Alquiler",
+      "postProperty": "Publicar Propiedad"
+    },
+    "Hero": {
+      "title": "New Cuscatlán",
+      "subtitle": "Tu futuro hogar, en el corazón de la modernidad.",
+      "searchPlaceholder": "¿Qué estás buscando?",
+      "searchButton": "Buscar",
+      "tags": {
+        "houses": "Casas",
+        "apartments": "Apartamentos",
+        "lands": "Terrenos"
+      }
+    },
+    "Footer": {
+      "slogan": "Transformando el mercado inmobiliario con la modernidad que mereces.",
+      "socialTitle": "Nuestras redes sociales",
+      "copyright": "NewCuscatlan.com - Todos los derechos reservados."
+    }
+  },
+  "Auth": {
+    "Login": {
+      "title": "Iniciar Sesión",
+      "subtitle": "Ingresa tus credenciales",
+      "emailLabel": "Correo electrónico",
+      "emailPlaceholder": "tu@correo.com",
+      "passwordLabel": "Contraseña",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "submitButton": "Entrar",
+      "loadingButton": "Cargando...",
+      "noAccount": "¿No tienes una cuenta?",
+      "signUp": "Regístrate",
+      "errorMessage": "Error al iniciar sesión"
+    },
+"SignUp": {
+  "title": "Crear cuenta",
+  "subtitle": "Encuentra tu próximo hogar con nosotros",
+  "emailLabel": "Correo electrónico",
+  "passwordLabel": "Contraseña",
+  "confirmPasswordLabel": "Confirmar contraseña",
+  "emailPlaceholder": "tu@correo.com",
+  "submitButton": "Registrarse",
+  "loadingButton": "Creando cuenta...",
+  "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+  "signIn": "Inicia sesión",
+  "errorMessage": "Algo salió mal. Por favor, intenta de nuevo."
+},
+    "ForgotPassword": {
+  "title": "Recuperar cuenta",
+  "subtitle": "Ingresa tu correo para enviarte un enlace",
+  "emailLabel": "Correo electrónico",
+  "emailPlaceholder": "tu@correo.com",
+  "submitButton": "Enviar enlace",
+  "loadingButton": "Enviando...",
+  "backToLogin": "Volver al inicio",
+  "successTitle": "Revisa tu correo",
+  "successMessage": "Hemos enviado un enlace de recuperación a",
+  "errorMessage": "No se pudo enviar el correo"
+},
+"ResetPassword": {
+  "title": "Nueva contraseña",
+  "subtitle": "Define tus nuevas credenciales de acceso",
+  "verifying": "Verificando seguridad...",
+  "passwordLabel": "Nueva contraseña",
+  "confirmPasswordLabel": "Confirmar contraseña",
+  "submitButton": "Actualizar contraseña",
+  "errorMessage": "Error al actualizar",
+  "successTitle": "Contraseña actualizada",
+  "successMessage": "Tu seguridad ha sido actualizada. Redirigiendo...",
+  "passwordMin": "Mínimo 6 caracteres",
+  "passwordsDontMatch": "Las contraseñas no coinciden",
+  "requestNew": "Pedir otro"
+}
+  }
+}

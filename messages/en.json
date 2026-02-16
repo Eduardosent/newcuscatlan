@@ -1,0 +1,79 @@
+{
+  "Landing": {
+    "Navbar": {
+      "sale": "For Sale",
+      "rent": "For Rent",
+      "postProperty": "Post Property"
+    },
+    "Hero": {
+      "title": "New Cuscatlán",
+      "subtitle": "Your future home, in the heart of modernity.",
+      "searchPlaceholder": "What are you looking for?",
+      "searchButton": "Search",
+      "tags": {
+        "houses": "Houses",
+        "apartments": "Apartments",
+        "lands": "Lands"
+      }
+    },
+    "Footer": {
+      "slogan": "Transforming the real estate market with the modernity you deserve.",
+      "socialTitle": "Our social networks",
+      "copyright": "NewCuscatlan.com - All rights reserved."
+    }
+  },
+  "Auth": {
+    "Login": {
+      "title": "Sign In",
+      "subtitle": "Enter your credentials",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "you@email.com",
+      "passwordLabel": "Password",
+      "forgotPassword": "Forgot password?",
+      "submitButton": "Sign In",
+      "loadingButton": "Loading...",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign Up",
+      "errorMessage": "Login failed"
+    },
+"SignUp": {
+      "title": "Create Account",
+      "subtitle": "Find your next home with us",
+      "emailLabel": "Email Address",
+      "passwordLabel": "Password",
+      "confirmPasswordLabel": "Confirm Password",
+      "emailPlaceholder": "name@example.com",
+      "submitButton": "Register",
+      "loadingButton": "Creating account...",
+      "alreadyHaveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "errorMessage": "Something went wrong. Please try again."
+    },
+    "ForgotPassword": {
+  "title": "Reset Password",
+  "subtitle": "Enter your email to receive a recovery link",
+  "emailLabel": "Email address",
+  "emailPlaceholder": "you@email.com",
+  "submitButton": "Send recovery link",
+  "loadingButton": "Sending...",
+  "backToLogin": "Back to login",
+  "successTitle": "Check your email",
+  "successMessage": "We've sent a recovery link to",
+  "errorMessage": "Failed to send recovery email"
+},
+"ResetPassword": {
+  "title": "New Password",
+  "subtitle": "Set your new access credentials",
+  "verifying": "Verifying security...",
+  "passwordLabel": "New Password",
+  "confirmPasswordLabel": "Confirm Password",
+  "submitButton": "Update password",
+  "errorMessage": "Update failed",
+  "successTitle": "Password updated",
+  "successMessage": "Your security has been updated. Redirecting...",
+  "passwordMin": "At least 6 characters",
+  "passwordsDontMatch": "Passwords do not match",
+  "requestNew": "Request new"
+}
+  }
+}
