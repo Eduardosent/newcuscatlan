@@ -18,3 +18,5 @@ export const propertySchema = z.object({
   phone: z.string().optional().or(z.literal("")),
   email: z.string().email("Invalid email").optional().or(z.literal("")),
 });
+
+export type CreatePropertyForm = z.infer<typeof propertySchema>;
