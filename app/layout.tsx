@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { Geist, Geist_Mono, Inter, Poppins, Montserrat, Roboto } from "next/font/google";
 import { getUserLocale, getAppMessages } from '@/config/locale'
 import { AuthProvider, ReactQueryProvider } from "@/providers";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 // const geistSans = Geist({
@@ -42,6 +43,7 @@ export default async function RootLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AuthProvider>
             {children}
+            <Toaster position="top-right" richColors closeButton />
           </AuthProvider>
         </NextIntlClientProvider>
         </ReactQueryProvider>

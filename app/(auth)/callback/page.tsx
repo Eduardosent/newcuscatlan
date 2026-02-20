@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation'; 
 import { supabase } from '@/config/supabase-client'; 
-import { AuthRepository } from '@/repositories/auth';
 import { useQueryClient } from '@tanstack/react-query';
 
 export default function AuthCallbackPage() {
@@ -21,10 +20,9 @@ export default function AuthCallbackPage() {
                     return router.replace('/login?error=auth_failed');
                 }
                 try {
-                    const targetPath = await AuthRepository.handleRedirect(data.user.id, queryClient);
-                    router.replace(targetPath);
+                    router.replace('/properties');
                 } catch (err) {
-                    router.replace('/my-properties?user=normal');
+                    router.replace('/properties');
                 }
             } else {
                 router.replace('/login');

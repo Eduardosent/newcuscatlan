@@ -1,8 +1,10 @@
 import Image from "next/image"
 import { useAuth } from "@/hooks"
+import { useTranslations } from "next-intl"
 
 export const GoogleButton = () => {
   const { signInWithGoogle } = useAuth()
+  const t = useTranslations("Auth")
 
   return (
     <div className="w-full">
@@ -22,7 +24,7 @@ export const GoogleButton = () => {
             className="object-contain mix-blend-normal" 
           />
         </div>
-        <span>Continuar con Google</span>
+        <span>{t('SignGoogle')}</span>
       </button>
     </div>
   )

@@ -3,6 +3,7 @@
     "Navbar": {
       "sale": "For Sale",
       "rent": "For Rent",
+      "explore": "Explore Properties",
       "postProperty": "Post Property"
     },
     "Hero": {
@@ -23,6 +24,7 @@
     }
   },
   "Auth": {
+    "SignGoogle": "Continue with Google",
     "Login": {
       "title": "Sign In",
       "subtitle": "Enter your credentials",
@@ -75,5 +77,23 @@
   "passwordsDontMatch": "Passwords do not match",
   "requestNew": "Request new"
 }
+  },
+  "Layout": {
+    "sections": {
+      "admin": "Admin",
+      "publisher": "Publisher",
+      "explore": "Explore"
+    },
+    "menu": {
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "myProperties": "My Properties",
+      "publish": "Publish",
+      "properties": "Properties",
+      "favorites": "Favorites",
+      "logout": "Sign Out",
+      "login": "Sign In",
+      "mobileTitle": "MENU"
+    }
   }
 }

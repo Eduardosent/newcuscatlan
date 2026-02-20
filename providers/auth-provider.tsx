@@ -53,7 +53,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signIn = async (email: string, password: string) => {
     const result = await AuthRepository.signInUser({ email, password });
     if (result.user) {
-      router.replace(await AuthRepository.handleRedirect(result.user.id, queryClient))
+      router.replace('/properties')
     };
   }
 

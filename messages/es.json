@@ -3,6 +3,7 @@
     "Navbar": {
       "sale": "Venta",
       "rent": "Alquiler",
+      "explore": "Explorar Propiedades",
       "postProperty": "Publicar Propiedad"
     },
     "Hero": {
@@ -23,6 +24,7 @@
     }
   },
   "Auth": {
+    "SignGoogle": "Continuar con Google",
     "Login": {
       "title": "Iniciar Sesión",
       "subtitle": "Ingresa tus credenciales",
@@ -75,5 +77,23 @@
   "passwordsDontMatch": "Las contraseñas no coinciden",
   "requestNew": "Pedir otro"
 }
+  },
+  "Layout": {
+    "sections": {
+      "admin": "Admin",
+      "publisher": "Publisher",
+      "explore": "Explorar"
+    },
+    "menu": {
+      "dashboard": "Dashboard",
+      "users": "Usuarios",
+      "myProperties": "Mis Propiedades",
+      "publish": "Publicar",
+      "properties": "Propiedades",
+      "favorites": "Favoritos",
+      "logout": "Cerrar Sesión",
+      "login": "Iniciar Sesión",
+      "mobileTitle": "MENÚ"
+    }
   }
 }

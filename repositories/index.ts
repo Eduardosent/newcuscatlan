@@ -1,2 +1,7 @@
 export { AuthRepository } from './auth'
+export { CategoryRepository } from './category'
+export { CountryRepository } from './country'
+export { CountryStateRepository } from './country-state'
+export { DevelopmentLevelRepository } from './development-level'
 export { ProfileRepository } from './profile'
+export { PropertyRepository } from './property'

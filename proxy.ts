@@ -28,24 +28,24 @@ export async function proxy(req: NextRequest) {
 
   const { data: { session } } = await supabase.auth.getSession()
   
-  const isAuthPage = req.nextUrl.pathname.startsWith('/login')
-  // Agregamos /my-properties como la ruta base a proteger
-  const isAdminPage = req.nextUrl.pathname.startsWith('/my-properties')
+  const isAuthPage = req.nextUrl.pathname == '/login' || req.nextUrl.pathname == '/become-publisher'
+  // // Agregamos /my-properties como la ruta base a proteger
+  // const isAdminPage = req.nextUrl.pathname.startsWith('/my-properties')
 
-  // 1. Si está logueado e intenta ir al Login -> Al listado de sus propiedades
+  // // 1. Si está logueado e intenta ir al Login -> Al listado de sus propiedades
   if (session && isAuthPage) {
-    return NextResponse.redirect(new URL('/my-properties', req.url))
+    return NextResponse.redirect(new URL('/properties', req.url))
   }
 
-  // 2. Si NO está logueado e intenta ir a sus propiedades -> Al login
-  if (!session && isAdminPage) {
-    return NextResponse.redirect(new URL('/login', req.url))
-  }
+  // // 2. Si NO está logueado e intenta ir a sus propiedades -> Al login
+  // if (!session && isAdminPage) {
+  //   return NextResponse.redirect(new URL('/login', req.url))
+  // }
 
-  return res
+  // return res
 }
 
 // El matcher debe estar pendiente de /my-properties
 export const config = {
-  matcher: ['/my-properties/:path*', '/login'],
+  matcher: ['/login','/become-publisher'],
 }

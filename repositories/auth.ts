@@ -17,19 +17,6 @@ export const AuthRepository = {
         }
         return data;
     },
-
-    async handleRedirect(userId: string, queryClient: QueryClient): Promise<string> {
-        const profile = await queryClient.fetchQuery({
-          queryKey: ['profile', userId],
-          queryFn: () => ProfileRepository.getProfile(userId),
-        });
-        const roleRoutes: Record<string, string> = {
-          admin: '/my-properties?user=admin',
-          publisher: '/my-properties?user=publisher',
-        };
-
-        return roleRoutes[profile.role] ?? '/my-properties?user=normal';
-    },
     
     async signInUser({ email, password }: { email: string, password: string }) {
         const { data, error } = await supabase.auth.signInWithPassword({
