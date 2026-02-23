@@ -140,13 +140,13 @@ export const Navbar = () => {
               {t('explore') || 'Explorar Propiedades'}
             </Link>
 
-            <Link 
+            {/* <Link 
               href="/become-publisher" 
               className="flex items-center gap-2 bg-[#D4AF37] hover:bg-[#b8962d] text-white px-5 py-2 rounded-full transition-all font-semibold text-sm shadow-md"
             >
               <PlusCircle className="w-4 h-4" />
               {t('postProperty') || 'Publicar Propiedad'}
-            </Link>
+            </Link> */}
           </div>
 
           {/* ESQUINA DERECHA: IDIOMA Y MOBILE TOGGLE */}
@@ -178,14 +178,14 @@ export const Navbar = () => {
             {t('explore') || 'Explorar'}
           </Link>
           
-          <Link 
+          {/* <Link 
             href="/become-publisher" 
             onClick={() => setIsOpen(false)}
             className="flex items-center justify-center gap-2 bg-[#D4AF37] text-white w-full py-3 rounded-lg font-bold"
           >
             <PlusCircle className="w-5 h-5" />
             {t('postProperty') || 'Publicar'}
-          </Link>
+          </Link> */}
         </div>
       </div>
     </nav>

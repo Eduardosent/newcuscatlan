@@ -129,6 +129,7 @@ export default function CreatePropertyPage() {
                 <Input 
                     label="Size (m²)" 
                     type="number" 
+                    step="any"
                     {...form.register('size')} 
                     icon={<Maximize size={14}/>} 
                     error={errors.size?.message} 
