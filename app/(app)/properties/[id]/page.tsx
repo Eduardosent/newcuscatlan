@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 import { PropertyGallery, ContactActions, CopyLinkButton, PropertyAdminActions } from "@/components/app/properties/id";
 import { APP_URL } from "@/config";
 import { BackButton } from "@/components/ui";
-import { useProperty } from "@/hooks/queries";
+import { useProfile, useProperty } from "@/hooks/queries";
+import { useAuth } from "@/hooks";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -14,6 +15,8 @@ interface Props {
 export default function PropertyDetailPage({ params }: Props) {
   const { id } = use(params);
   const { data: property, isLoading } = useProperty(id);
+  const { user } = useAuth()
+  const { data: profile } = useProfile(); 
 
   // --- SKELETON: MISMO DISEÑO, DIFERENTE CONTENIDO ---
   if (isLoading) {
@@ -64,7 +67,9 @@ export default function PropertyDetailPage({ params }: Props) {
     <main className="max-w-7xl mx-auto px-4">
       <div className="flex justify-between items-center">
         <BackButton />
-        <PropertyAdminActions id={id} title={property.title}/> 
+{profile?.role === "admin" || (profile?.role === "publisher" && user?.id === property.user_id) ? (
+  <PropertyAdminActions id={id} title={property.title} />
+) : null}
       </div>
       <div className="mb-6 flex flex-row items-start justify-between">
         <div>

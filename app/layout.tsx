@@ -23,7 +23,21 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['400','500','600','700','
 
 export const metadata: Metadata = {
   title: "NewCuscatlan.com",
-  description: "Find properties",
+  description: "Encuentra tu proximo hogar",
+    openGraph: {
+    title: "NewCuscatlan.com",
+    description: "Encuentra tu proximo hogar",
+    url: "https://newcuscatlan.com",
+    type: "website",
+    images: [
+      {
+        url: "/nc-logo.png", 
+        width: 500,
+        height: 500,
+        alt: "New Cuscatlan Logo",
+      },
+    ],
+  },
 };
 
 export default async function RootLayout({
