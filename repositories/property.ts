@@ -41,6 +41,22 @@ async getProperties(filters?: PropertyFilters): Promise<Property[]> {
   if (error) throw new Error(error.message);
   return data || [];
 },
+async getPropertyById(id: string): Promise<Property> {
+  const { data, error } = await supabase
+    .from('properties')
+    .select(`
+      *,
+      category:categories(id, name),
+      development_level:development_levels(id, name),
+      country:countries(id, name),
+      country_state:country_states(id, name)
+    `)
+    .eq('id', id)
+    .single(); // Devuelve el objeto directo, no un array
+
+  if (error) throw new Error(error.message);
+  return data;
+},
   async createProperty(request: any) {
     try {
       const formData = new FormData();
@@ -81,4 +97,50 @@ async getProperties(filters?: PropertyFilters): Promise<Property[]> {
       throw new Error(message);
     }
   },
+  async updateProperty(id: string, request: any) {
+    try {
+        const formData = new FormData();
+
+        // 1. Campos obligatorios para el PATCH
+        formData.append('id', id);
+        formData.append('title', request.title);
+        formData.append('description', request.description);
+        formData.append('price', String(request.price));
+        formData.append('size', String(request.size));
+        formData.append('phone', request.phone || '');
+        formData.append('email', request.email || '');
+
+        // 2. IDs de relaciones
+        formData.append('category_id', String(request.category?.id));
+        formData.append('development_level_id', String(request.development_level?.id));
+        formData.append('country_id', String(request.country?.id));
+        formData.append('country_state_id', String(request.country_state?.id));
+
+        // 3. Imágenes (Mezcla de Files y Strings)
+        // El endpoint usa formData.getAll("images")
+        if (request.images && request.images.length > 0) {
+            request.images.forEach((item: File | string) => {
+                formData.append('images', item); 
+            });
+        }
+
+        const { data } = await api.patch('/api/properties/update', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        });
+
+        return data;
+    } catch (error: any) {
+        const message = error.response?.data?.error || error.message || 'Error updating property';
+        throw new Error(message);
+    }
+},
+async deleteProperty(id: string) {
+    try {
+      const { data } = await api.delete(`/api/properties/delete?id=${id}`);
+      return data;
+    } catch (error: any) {
+      const message = error.response?.data?.error || error.message || 'Error deleting property';
+      throw new Error(message);
+    }
+  }
 };

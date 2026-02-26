@@ -101,7 +101,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import Link from 'next/link'; // IMPORTADO CORRECTAMENTE DE NEXT/LINK
 import { Menu, X, Search, PlusCircle } from 'lucide-react'; 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
@@ -132,11 +132,12 @@ export const Navbar = () => {
 
           {/* BOTONES CENTRALES - DESKTOP */}
           <div className="hidden md:flex items-center space-x-4">
+            {/* BOTÓN EXPLORE: Fondo blanco, lupa azul, más grande */}
             <Link 
               href="/properties" 
-              className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full border border-white/30 transition-all font-semibold text-sm"
+              className="flex items-center gap-3 bg-white hover:bg-gray-100 text-[#1D4ED8] px-6 py-3 rounded-full transition-all font-bold text-base shadow-md"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-5 h-5 text-[#1D4ED8]" />
               {t('explore') || 'Explorar Propiedades'}
             </Link>
 
@@ -172,9 +173,9 @@ export const Navbar = () => {
           <Link 
             href="/properties" 
             onClick={() => setIsOpen(false)}
-            className="flex items-center justify-center gap-2 bg-white/10 text-white w-full py-3 rounded-lg font-bold"
+            className="flex items-center justify-center gap-3 bg-white text-[#1D4ED8] w-full py-4 rounded-xl font-black text-lg shadow-xl"
           >
-            <Search className="w-5 h-5" />
+            <Search className="w-6 h-6 text-[#1D4ED8]" />
             {t('explore') || 'Explorar'}
           </Link>
           

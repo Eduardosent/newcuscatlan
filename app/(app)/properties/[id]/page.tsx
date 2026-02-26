@@ -1,29 +1,58 @@
-import { supabaseServer } from "@/config/supabase-server";
+"use client";
+
+import { use } from "react";
 import { notFound } from "next/navigation";
-import { PropertyGallery, ContactActions, CopyLinkButton }from "@/components/app/properties/id";
+import { PropertyGallery, ContactActions, CopyLinkButton, PropertyAdminActions } from "@/components/app/properties/id";
 import { APP_URL } from "@/config";
 import { BackButton } from "@/components/ui";
+import { useProperty } from "@/hooks/queries";
 
 interface Props {
   params: Promise<{ id: string }>;
 }
 
-export default async function PropertyDetailPage({ params }: Props) {
-  const { id } = await params;
+export default function PropertyDetailPage({ params }: Props) {
+  const { id } = use(params);
+  const { data: property, isLoading } = useProperty(id);
 
-  const { data: property, error } = await supabaseServer
-    .from("properties")
-    .select(`
-      *,
-      categories(name),
-      development_levels(name),
-      countries(name),
-      country_states(name)
-    `)
-    .eq("id", id)
-    .single();
+  // --- SKELETON: MISMO DISEÑO, DIFERENTE CONTENIDO ---
+  if (isLoading) {
+    return (
+      <main className="max-w-7xl mx-auto px-4 animate-pulse">
+        <div className="flex justify-between items-center mb-4">
+          <div className="h-10 w-24 bg-gray-200 rounded-lg" />
+          <div className="h-10 w-32 bg-gray-200 rounded-lg" />
+        </div>
+        <div className="mb-6 flex flex-row items-start justify-between">
+          <div className="space-y-3">
+            <div className="h-9 w-64 bg-gray-200 rounded-md" />
+            <div className="h-6 w-48 bg-gray-200 rounded-md" />
+          </div>
+          <div className="h-10 w-10 bg-gray-200 rounded-full" />
+        </div>
+        <div className="mb-10 h-[400px] w-full bg-gray-200 rounded-3xl" />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="lg:col-span-2 space-y-8">
+            <div className="flex gap-6 border-b pb-6">
+              <div className="h-20 w-[140px] bg-gray-100 rounded-xl" />
+              <div className="h-20 w-[140px] bg-gray-100 rounded-xl" />
+            </div>
+            <div className="space-y-4">
+              <div className="h-8 w-40 bg-gray-200 rounded" />
+              <div className="h-4 w-full bg-gray-100 rounded" />
+              <div className="h-4 w-full bg-gray-100 rounded" />
+              <div className="h-4 w-2/3 bg-gray-100 rounded" />
+            </div>
+          </div>
+          <aside className="lg:col-span-1">
+            <div className="h-64 w-full bg-gray-50 rounded-3xl border border-gray-100" />
+          </aside>
+        </div>
+      </main>
+    );
+  }
 
-  if (error || !property) {
+  if (!property) {
     notFound();
   }
 
@@ -33,15 +62,18 @@ export default async function PropertyDetailPage({ params }: Props) {
 
   return (
     <main className="max-w-7xl mx-auto px-4">
-      <BackButton/>
+      <div className="flex justify-between items-center">
+        <BackButton />
+        <PropertyAdminActions id={id} title={property.title}/> 
+      </div>
       <div className="mb-6 flex flex-row items-start justify-between">
         <div>
-        <h1 className="text-3xl font-bold text-gray-900">{property.title}</h1>
-        <p className="text-gray-500 text-lg">
-          {property.country_states?.name}, {property.countries?.name}
-        </p>
+          <h1 className="text-3xl font-bold text-gray-900">{property.title}</h1>
+          <p className="text-gray-500 text-lg">
+            {property.country_state?.name}, {property.country?.name}
+          </p>
         </div>
-      <CopyLinkButton id={id} />
+        <CopyLinkButton id={id} />
       </div>
 
       <section className="mb-10">
@@ -73,10 +105,9 @@ export default async function PropertyDetailPage({ params }: Props) {
           <div className="sticky top-24 p-8 border border-gray-200 rounded-3xl shadow-xl bg-white">
             <h3 className="text-xl font-extrabold text-gray-900 mb-6 tracking-tight">¿Te interesa la propiedad?</h3>
             
-            {/* Llamada al componente de cliente con las acciones interactivas */}
             <ContactActions 
-              phone={property.phone} 
-              email={property.email} 
+              phone={property.phone ?? undefined} 
+              email={property.email ?? undefined} 
               whatsappUrl={whatsappUrl} 
             />
 

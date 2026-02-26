@@ -17,9 +17,10 @@ export const propertySchema = z.object({
   country: CountrySchema.nullable().refine(val => val !== null, "Select a country"),
   country_state: StateSchema.nullable().refine(val => val !== null, "Select a state"),
   
-  images: z.array(z.instanceof(File)).min(1, "At least one image is required"),
+  images: z.array(z.union([z.instanceof(File), z.string()]))
+    .min(1, "At least one image is required"),
   phone: z.string().optional().or(z.literal("")),
   email: z.string().email("Invalid email").optional().or(z.literal("")),
 });
 
-export type CreatePropertyForm = z.infer<typeof propertySchema>;
+export type PropertyForm = z.infer<typeof propertySchema>;
