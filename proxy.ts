@@ -29,11 +29,11 @@ export async function proxy(req: NextRequest) {
   const { data: { session } } = await supabase.auth.getSession()
   const path = req.nextUrl.pathname
 
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('role')
-    .eq('id', session?.user.id)
-    .single()
+  // const { data: profile } = await supabase
+  //   .from('profiles')
+  //   .select('role')
+  //   .eq('id', session?.user.id)
+  //   .single()
   
   const isAuthPage = path == '/login'// || req.nextUrl.pathname == '/become-publisher'
   const isBecomePage = path== '/become-publisher'
@@ -42,8 +42,8 @@ export async function proxy(req: NextRequest) {
 
   // // 1. Si está logueado e intenta ir al Login -> Al listado de sus propiedades
   if (session && isAuthPage) {
-    if(isAuthPage)return NextResponse.redirect(new URL('/properties', req.url))
-    if(isBecomePage && profile?.role === "publisher")return NextResponse.redirect(new URL('/properties', req.url))
+    return NextResponse.redirect(new URL('/properties', req.url))
+    // if(isBecomePage && profile?.role === "publisher")return NextResponse.redirect(new URL('/properties', req.url))
   }
 
   // // 2. Si NO está logueado e intenta ir a sus propiedades -> Al login
