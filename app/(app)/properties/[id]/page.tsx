@@ -59,7 +59,7 @@ export default function PropertyDetailPage({ params }: Props) {
     notFound();
   }
 
-  const whatsappMessage = encodeURIComponent(`Hola, me interesa esta propiedad: ${property.title} ${APP_URL}`);
+  const whatsappMessage = encodeURIComponent(`Hola, me interesa esta propiedad: ${property.title} ${APP_URL}/properties/${id}`);
   const cleanPhone = property.phone?.replace(/\D/g, '');
   const whatsappUrl = `https://wa.me/${cleanPhone}?text=${whatsappMessage}`;
 

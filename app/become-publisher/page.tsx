@@ -8,7 +8,7 @@ export default function BecomePublisherPage() {
   const t = useTranslations('BecomePublisher');
 
   // Configuración de WhatsApp
-  const WHATSAPP_NUMBER = "50370000000"; // Tu número de admin
+  const WHATSAPP_NUMBER = "50379853535"; // Tu número de admin
   const message = "Hola, me interesa publicar mis propiedades en NewCuscatlan.com. ¿Me podrían ayudar a crear una cuenta de Publisher?";
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
