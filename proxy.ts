@@ -51,7 +51,7 @@ export async function proxy(req: NextRequest) {
   //   return NextResponse.redirect(new URL('/login', req.url))
   // }
 
-  // return res
+  return res
 }
 
 // El matcher debe estar pendiente de /my-properties
