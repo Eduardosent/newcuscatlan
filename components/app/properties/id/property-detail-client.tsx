@@ -2,21 +2,64 @@
 
 import { use } from "react";
 import { notFound } from "next/navigation";
-import { PropertyGallery, ContactActions, CopyLinkButton, PropertyAdminActions } from "@/components/app/properties/id";
+import { PropertyGallery, ContactActions, CopyLinkButton, PropertyAdminActions, MortgageCalculator, PropertyReferencePoints } from "@/components/app/properties/id";
 import { APP_URL } from "@/config";
 import { BackButton } from "@/components/ui";
 import { useProfile, useProperty } from "@/hooks/queries";
 import { useAuth } from "@/hooks";
+import { parseEWKB } from "@/utils";
 
 interface Props {
   params: Promise<{ id: string }>;
 }
+
+export function verifyDistance(point1: any, point2: any): number {
+  if(!point1 || !point2) {
+    console.error("Error: Uno de los puntos es nulo o indefinido", {point1, point2});
+    return 0;
+  }
+    // 1. Forzamos conversión a Float por si vienen como strings
+    const lat1 = parseFloat(point1.latitude);
+    const lon1 = parseFloat(point1.longitude);
+    const lat2 = parseFloat(point2.latitude);
+    const lon2 = parseFloat(point2.longitude);
+
+    // 2. Verificación de seguridad inmediata
+    if ([lat1, lon1, lat2, lon2].some(val => isNaN(val))) {
+        console.error("Error: Uno de los valores no es un número válido", {lat1, lon1, lat2, lon2});
+        return 0;
+    }
+
+    const R = 6371e3; // Radio de la Tierra en metros
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+
+    const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+
+    console.log(`Cálculo exitoso: ${distance.toFixed(2)} metros`);
+    return distance;
+}
+
+// PRUEBA DE FUEGO (Copia esto también para ver el log)
+const myLocation = { longitude: -89.0556, latitude: 13.4444 };
+const target = { latitude: 13.4409, longitude: -89.0556 }; // Un punto de ejemplo
+
+// verifyDistance(myLocation, target);
 
 export function PropertyDetailClient({ params }: Props) {
   const { id } = use(params);
   const { data: property, isLoading } = useProperty(id);
   const { user } = useAuth()
   const { data: profile } = useProfile(); 
+  const propertyLocation = property?.location !=null ? parseEWKB (property.location) : null;
+  console.log("Coordenadas parseadas:", propertyLocation);
+  verifyDistance(myLocation, target);
 
   // --- SKELETON: MISMO DISEÑO, DIFERENTE CONTENIDO ---
   if (isLoading) {
@@ -84,8 +127,9 @@ export function PropertyDetailClient({ params }: Props) {
       <section className="mb-10">
         <PropertyGallery media={property.image_urls} />
       </section>
+            <PropertyReferencePoints location={propertyLocation} />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mt-8">
         <div className="lg:col-span-2 space-y-8">
           <div className="flex gap-6 border-b pb-6">
             <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 min-w-[140px]">
@@ -124,6 +168,7 @@ export function PropertyDetailClient({ params }: Props) {
           </div>
         </aside>
       </div>
+      <MortgageCalculator initialPrice={Number(property.price)} />
     </main>
   );
 }

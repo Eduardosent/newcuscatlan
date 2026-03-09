@@ -14,6 +14,9 @@ export default function CreatePropertyPage() {
             development_level_id: data.development_level?.id,
             country_id: data.country?.id,
             country_state_id: data.country_state?.id,
+            location: data.location_coords 
+                ? `POINT(${data.location_coords.longitude} ${data.location_coords.latitude})` 
+                : null,
         };
         createProperty(apiPayload);
     };

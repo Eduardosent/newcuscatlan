@@ -74,6 +74,10 @@ async getPropertyById(id: string): Promise<Property> {
       formData.append('development_level_id', String(request.development_level_id));
       formData.append('country_id', String(request.country_id));
       formData.append('country_state_id', String(request.country_state_id));
+      if (request.location_coords) {
+        const { longitude, latitude } = request.location_coords;
+        formData.append('location', `POINT(${longitude} ${latitude})`);
+      }
 
       // 2. Procesamiento de Imágenes
       // Es vital que el nombre sea "images" para que formData.getAll("images") funcione
@@ -115,6 +119,10 @@ async getPropertyById(id: string): Promise<Property> {
         formData.append('development_level_id', String(request.development_level?.id));
         formData.append('country_id', String(request.country?.id));
         formData.append('country_state_id', String(request.country_state?.id));
+        if (request.location_coords) {
+            const { longitude, latitude } = request.location_coords;
+            formData.append('location', `POINT(${longitude} ${latitude})`);
+        }
 
         // 3. Imágenes (Mezcla de Files y Strings)
         // El endpoint usa formData.getAll("images")

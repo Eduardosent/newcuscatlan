@@ -28,6 +28,7 @@ export interface Property {
   development_level: DevelopmentLevel;
   country: Country;
   country_state: CountryState;
+  location: string | null; // WKT (Well-Known Text) para coordenadas geográficas
 }
 
 export interface PropertyFilters {

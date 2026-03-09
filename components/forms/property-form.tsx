@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Send, MapPin, Globe, Layers, Tag, DollarSign, Maximize, Phone, Mail, Loader2 } from 'lucide-react';
-import { Input, ImageUploader, Select, Textarea } from '@/components/forms';
+import { Input, ImageUploader, Select, Textarea, LocationPicker } from '@/components/forms';
 import { propertySchema, type PropertyForm } from '@/types/forms/create-property';
 import { useCategories, useCountries, useCountryStates, useDevelopmentLevels } from '@/hooks/queries';
 
@@ -34,6 +34,7 @@ export function PropertyFormComponent({
             development_level: initialData?.development_level || undefined,
             country: initialData?.country || undefined,
             country_state: initialData?.country_state || undefined,
+            location_coords: initialData?.location_coords || null,
             images: initialData?.images || [],
             phone: initialData?.phone || '',
             email: initialData?.email || ''
@@ -55,7 +56,7 @@ export function PropertyFormComponent({
     }, [selectedCountry, states]);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit, (errors) => console.log("ERRORES DE ZOD:", errors,form))} className="max-w-6xl mx-auto p-8 space-y-12">
+        <form onSubmit={handleSubmit(onSubmit)} className="max-w-6xl mx-auto p-8 space-y-12">
             
             {/* Sección 1: Información Principal */}
             <section className="space-y-6">
@@ -197,6 +198,21 @@ export function PropertyFormComponent({
                     icon={<Mail size={14}/>} 
                     placeholder="owner@example.com" 
                     error={errors.email?.message} 
+                />
+            </section>
+            <section className="pt-4">
+                <Controller
+                    name="location_coords"
+                    control={control}
+                    render={({ field }) => (
+                        <LocationPicker 
+                            label="Punto Exacto (GPS)"
+                            value={field.value}
+                            onChange={field.onChange}
+                            error={errors.location_coords?.message}
+                            placeholder="Pega las coordenadas de la propiedad"
+                        />
+                    )}
                 />
             </section>
 

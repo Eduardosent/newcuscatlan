@@ -4,6 +4,10 @@ const CategorySchema = z.object({ id: z.number(), name: z.string() });
 const DevelopmentLevelSchema = z.object({ id: z.number(), name: z.string() });
 const CountrySchema = z.object({ id: z.number(), name: z.string() });
 const StateSchema = z.object({ id: z.number(), name: z.string(), country_id: z.number() });
+const LocationCoordsSchema = z.object({
+  latitude: z.number().min(-90, "Latitud inválida").max(90, "Latitud inválida"),
+  longitude: z.number().min(-180, "Longitud inválida").max(180, "Longitud inválida")
+});
 
 export const propertySchema = z.object({
   title: z.string().min(3, "Required"),
@@ -16,6 +20,7 @@ export const propertySchema = z.object({
   development_level: DevelopmentLevelSchema.nullable().refine(val => val !== null, "Select a level"),
   country: CountrySchema.nullable().refine(val => val !== null, "Select a country"),
   country_state: StateSchema.nullable().refine(val => val !== null, "Select a state"),
+  location_coords: LocationCoordsSchema.nullable().optional(),
   
   images: z.array(z.union([z.instanceof(File), z.string()]))
     .min(1, "At least one image is required"),

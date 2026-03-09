@@ -26,6 +26,7 @@ export async function POST(req: NextRequest) {
     const country_state_id = Number(formData.get("country_state_id"));
 
     const files = formData.getAll("images") as File[];
+    const location = formData.get("location") as string;
 
     const mediaUrls: string[] = [];
 
@@ -80,7 +81,8 @@ export async function POST(req: NextRequest) {
         country_state_id,
         phone,
         email: email || null,
-        image_urls: mediaUrls
+        image_urls: mediaUrls,
+        location: location || null
       })
       .select()
       .single();

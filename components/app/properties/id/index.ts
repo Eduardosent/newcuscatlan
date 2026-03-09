@@ -1,5 +1,7 @@
 export { ContactActions } from './contact-actions'
 export { CopyLinkButton } from './copy-link-button'
+export { MortgageCalculator } from './mortgage-calculator'
 export { PropertyGallery } from './property-gallery'
 export { PropertyAdminActions } from './property-admin-actions'
 export { PropertyDetailClient } from './property-detail-client'
+export { PropertyReferencePoints } from './property-reference-points'

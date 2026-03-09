@@ -5,6 +5,7 @@ import { PropertyFormComponent } from "@/components/forms/property-form";
 import { useProperty, useUpdateProperty } from "@/hooks/queries";
 import { Loader2, ArrowLeft, AlertCircle } from 'lucide-react';
 import { PropertyForm } from "@/types/forms/create-property"; // Tu tipo de Zod
+import { parseEWKB } from "@/utils";
 
 export default function EditPropertyPage() {
     const { id } = useParams() as { id: string };
@@ -15,6 +16,7 @@ export default function EditPropertyPage() {
 
     // MAPPER: Transformamos la data de la API al formato que Zod entiende
     const formatInitialData = (data: any): PropertyForm => {
+
         return {
             title: data.title || '',
             description: data.description || '',
@@ -26,6 +28,7 @@ export default function EditPropertyPage() {
             country_state: data.country_state 
     ? { ...data.country_state, country_id: data.country_id || data.country?.id } 
     : null,
+            location_coords: parseEWKB(data.location),
             // Importante: image_urls (DB) -> images (Zod)
             images: data.image_urls || [],
             phone: data.phone || '',
