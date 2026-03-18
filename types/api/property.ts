@@ -6,6 +6,7 @@ export interface Property {
   description: string | null;
   price: number;
   size: number;
+  pricing_unit: "total" | "sq_v" | "sq_m";
   
   // Foreign Keys (Raw IDs)
   user_id: string;

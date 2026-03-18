@@ -27,6 +27,7 @@ export default function PropertiesHeader() {
 
   const { data, isLoading } = useProperties(activeFilters);
   console.log(data)
+  console.log(data?.map(p => p.id))
 
   // Funciones de acción
   const handleApplyFilters = () => {

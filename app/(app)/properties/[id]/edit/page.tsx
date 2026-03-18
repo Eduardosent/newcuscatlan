@@ -6,6 +6,7 @@ import { useProperty, useUpdateProperty } from "@/hooks/queries";
 import { Loader2, ArrowLeft, AlertCircle } from 'lucide-react';
 import { PropertyForm } from "@/types/forms/create-property"; // Tu tipo de Zod
 import { parseEWKB } from "@/utils";
+import { BackButton } from "@/components/ui";
 
 export default function EditPropertyPage() {
     const { id } = useParams() as { id: string };
@@ -52,9 +53,7 @@ export default function EditPropertyPage() {
     return (
         <main className="min-h-screen py-12">
             <div className="max-w-6xl mx-auto px-8 mb-10">
-                <button onClick={() => router.back()} className="mb-4 text-gray-400 hover:text-black flex items-center gap-2 text-xs font-bold uppercase tracking-widest">
-                    <ArrowLeft size={14}/> Back
-                </button>
+                <BackButton />
                 <h1 className="text-5xl font-black uppercase tracking-tighter">Edit Property</h1>
             </div>
 

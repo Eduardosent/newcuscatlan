@@ -25,14 +25,22 @@ export function PropertyCard({ prop }: { prop: Property }) {
 
       <div className="p-6">
         {/* Título y Precio */}
-        <div className="flex justify-between items-start mb-2">
-          <h3 className="font-bold text-gray-900 leading-tight line-clamp-1 flex-1">
-            {prop.title}
-          </h3>
-          <p className="text-blue-600 font-black text-lg ml-4">
-            ${prop.price.toLocaleString()}
-          </p>
-        </div>
+  <div className="flex justify-between items-start mb-2">
+    <h3 className="font-bold text-gray-900 leading-tight line-clamp-1 flex-1">
+      {prop.title}
+    </h3>
+    <div className="text-right ml-4">
+      <p className="text-blue-600 font-black text-lg leading-none">
+        ${prop.price.toLocaleString()}
+        {prop.pricing_unit === "sq_v" && (
+          <span className="text-[10px] text-blue-400 ml-0.5">/v²</span>
+        )}
+        {prop.pricing_unit === "sq_m" && (
+          <span className="text-[10px] text-blue-400 ml-0.5">/m²</span>
+        )}
+      </p>
+    </div>
+  </div>
 
         {/* Descripción corta (truncada) */}
         <p className="text-gray-500 text-sm mb-4 line-clamp-2">
@@ -41,10 +49,14 @@ export function PropertyCard({ prop }: { prop: Property }) {
 
         {/* Ubicación y Tamaño */}
         <div className="flex items-center text-gray-400 text-sm gap-4">
-          <span className="flex items-center gap-1.5 line-clamp-1">
-            <MapPin className="w-4 h-4 text-blue-400" /> 
-            {prop.country_state?.name}, {prop.country?.name}
-          </span>
+          <span className="flex items-start gap-1.5 flex-1 min-w-0">
+        <MapPin className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" /> 
+        {/* Aquí está el truco: leading-tight y <br /> */}
+        <span className="line-clamp-2 text-gray-600 leading-tight">
+          {prop.country_state?.name}<br />
+          <span className="text-xs text-gray-400">{prop.country?.name}</span>
+        </span>
+      </span>
           <span className="flex items-center gap-1.5 shrink-0">
             <Maximize2 className="w-4 h-4 text-blue-400" /> {prop.size} m²
           </span>

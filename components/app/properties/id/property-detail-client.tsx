@@ -133,9 +133,19 @@ export function PropertyDetailClient({ params }: Props) {
         <div className="lg:col-span-2 space-y-8">
           <div className="flex gap-6 border-b pb-6">
             <div className="bg-blue-50 p-4 rounded-xl border border-blue-100 min-w-[140px]">
-              <p className="text-xs text-blue-600 font-bold uppercase tracking-wider">Precio</p>
-              <p className="text-2xl font-black text-blue-900">${Number(property.price).toLocaleString()}</p>
-            </div>
+      <p className="text-xs text-blue-600 font-bold uppercase tracking-wider">
+        {property.pricing_unit === "sq_v" 
+          ? "Precio por V²" 
+          : property.pricing_unit === "sq_m" 
+            ? "Precio por M²" 
+            : "Precio Total"}
+      </p>
+      <p className="text-2xl font-black text-blue-900">
+        ${Number(property.price).toLocaleString()}
+        {property.pricing_unit === "sq_v" && <span className="text-sm font-bold ml-1">/ v²</span>}
+        {property.pricing_unit === "sq_m" && <span className="text-sm font-bold ml-1">/ m²</span>}
+      </p>
+    </div>
             <div className="bg-green-50 p-4 rounded-xl border border-green-100 min-w-[140px]">
               <p className="text-xs text-green-600 font-bold uppercase tracking-wider">Tamaño</p>
               <p className="text-2xl font-black text-green-900">{property.size} m²</p>

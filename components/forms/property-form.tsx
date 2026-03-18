@@ -29,7 +29,7 @@ export function PropertyFormComponent({
             title: initialData?.title || '',
             description: initialData?.description || '',
             price: initialData?.price || 0,
-            size: initialData?.size || 0,
+            size: initialData?.size || null,
             category: initialData?.category || undefined,
             development_level: initialData?.development_level || undefined,
             country: initialData?.country || undefined,
@@ -105,6 +105,7 @@ export function PropertyFormComponent({
                 <Input 
                     label="Price ($)" 
                     type="number" 
+                    step="any"
                     {...form.register('price')} 
                     icon={<DollarSign size={14}/>} 
                     error={errors.price?.message} 

@@ -13,7 +13,7 @@ export const propertySchema = z.object({
   title: z.string().min(3, "Required"),
   description: z.string().min(10, "Required"),
   price: z.coerce.number().positive("Must be greater than 0"),
-  size: z.coerce.number().positive("Must be greater than 0"),
+  size: z.coerce.number().positive("Must be greater than 0").nullable().optional().or(z.literal("")),
   
   // nullable() permite el estado inicial vacío que necesitas
   category: CategorySchema.nullable().refine(val => val !== null, "Select a category"),
