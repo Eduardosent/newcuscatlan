@@ -1,46 +1,64 @@
 import { api, supabase } from "@/config";
-import { Property, PropertyFilters } from "@/types/api";
+import { PaginatedResponse, Property, PropertyFilters } from "@/types/api";
 
 export const PropertyRepository = {
-async getProperties(filters?: PropertyFilters): Promise<Property[]> {
-  // 1. Empezamos con la base (Traer todo)
-  let query = supabase
-    .from('properties')
-    .select(`
-      *,
-      category:categories(id, name),
-      development_level:development_levels(id, name),
-      country:countries(id, name),
-      country_state:country_states(id, name),
-      is_favorite:favorites!left(id, user_id)
-    `);
+async getProperties(filters?: PropertyFilters): Promise<PaginatedResponse<Property>> {
+    // 1. Configuración de Paginación
+    const PAGE_SIZE = filters?.pageSize || 20;
+    const currentPage = filters?.page || 0;
+    const from = currentPage * PAGE_SIZE;
+    const to = from + PAGE_SIZE - 1;
 
-  // 2. Solo agregamos filtros si el valor existe y es válido
-  if(filters?.title){
-    query = query.ilike('title', `%${filters.title}%`);
-  }
-  if (filters?.category_id) {
-    query = query.eq('category_id', filters.category_id);
-  }
-  if(filters?.minPrice){
-    query = query.gte('price', filters.minPrice);
-  }
-  if(filters?.maxPrice){
-    query = query.lte('price', filters.maxPrice);
-  }
-  if(filters?.minSize){
-    query = query.gte('size', filters.minSize);
-  }
-  if(filters?.maxSize){
-    query = query.lte('size', filters.maxSize);
-  }
+    // 2. Base de la query con conteo exacto
+    let query = supabase
+      .from('properties')
+      .select(`
+        *,
+        category:categories(id, name),
+        development_level:development_levels(id, name),
+        country:countries(id, name),
+        country_state:country_states(id, name),
+        is_favorite:favorites!left(id, user_id)
+      `, { count: 'exact' });
 
-  // 3. Ordenar y ejecutar
-  const { data, error } = await query.order('created_at', { ascending: false });
+    // 3. Filtros condicionales
+    if (filters?.title) {
+      query = query.ilike('title', `%${filters.title}%`);
+    }
+    if (filters?.category_id) {
+      query = query.eq('category_id', filters.category_id);
+    }
+    if (filters?.minPrice) {
+      query = query.gte('price', filters.minPrice);
+    }
+    if (filters?.maxPrice) {
+      query = query.lte('price', filters.maxPrice);
+    }
+    if (filters?.minSize) {
+      query = query.gte('size', filters.minSize);
+    }
+    if (filters?.maxSize) {
+      query = query.lte('size', filters.maxSize);
+    }
 
-  if (error) throw new Error(error.message);
-  return data || [];
-},
+    // 4. Ordenar, aplicar rango (paginación) y ejecutar
+    const { data, error, count } = await query
+      .order('created_at', { ascending: false })
+      .range(from, to);
+
+    if (error) throw new Error(error.message);
+
+    const totalCount = count || 0;
+
+    // 5. Retorno estructurado con PaginatedResponse
+    return {
+      data: (data as Property[]) || [],
+      count: totalCount,
+      currentPage: currentPage,
+      pageSize: PAGE_SIZE,
+      totalPages: Math.ceil(totalCount / PAGE_SIZE)
+    };
+  },
 async getPropertyById(id: string): Promise<Property> {
   const { data, error } = await supabase
     .from('properties')

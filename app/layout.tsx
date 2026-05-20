@@ -22,21 +22,47 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['400','500','600','700','
 // const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NewCuscatlan.com",
-  description: "Encuentra tu proximo hogar",
-    openGraph: {
-    title: "NewCuscatlan.com",
-    description: "Encuentra tu proximo hogar",
+  // Título: Enfocado en la venta de propiedades, el sector inmobiliario y la ubicación clave en El Salvador
+  title: "New Cuscatlan | Venta de Propiedades y Bienes Raíces en El Salvador",
+  
+  // Descripción: Ataca directamente la venta de terrenos, casas y proyectos residenciales en la zona de Nuevo Cuscatlán
+  description: "Venta de propiedades exclusivas, casas y terrenos en Nuevo Cuscatlán, El Salvador. Encuentra las mejores opciones de bienes raíces para invertir o vivir.",
+  
+  // Palabras clave estratégicas para indexar rápido en el nicho inmobiliario local
+  keywords: [
+    "New Cuscatlan propiedades",
+    "Venta de casas en Nuevo Cuscatlan",
+    "Terrenos en Nuevo Cuscatlán El Salvador",
+    "Bienes raíces El Salvador",
+    "Inmobiliaria Nuevo Cuscatlan",
+    "Comprar casa en El Salvador",
+    "Proyectos residenciales El Salvador"
+  ],
+
+  // Open Graph optimizado para que al compartir el link en redes se vea profesional y comercial
+  openGraph: {
+    title: "New Cuscatlan | Venta de Propiedades y Bienes Raíces",
+    description: "Explora la venta de casas, terrenos y propiedades exclusivas en Nuevo Cuscatlán, El Salvador.",
     url: "https://newcuscatlan.com",
+    siteName: "New Cuscatlan",
+    locale: "es_SV",
     type: "website",
     images: [
       {
         url: "/nc-logo.png", 
         width: 500,
         height: 500,
-        alt: "New Cuscatlan Logo",
+        alt: "New Cuscatlan - Bienes Raíces en El Salvador",
       },
     ],
+  },
+
+  // Twitter Card para asegurar el renderizado correcto en plataformas sociales
+  twitter: {
+    card: "summary_large_image",
+    title: "New Cuscatlan | Bienes Raíces en El Salvador",
+    description: "Venta de casas y terrenos en la zona con mayor plusvalía de Nuevo Cuscatlán.",
+    images: ["/nc-logo.png"],
   },
 };
 

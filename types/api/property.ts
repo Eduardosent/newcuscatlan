@@ -34,9 +34,13 @@ export interface Property {
 
 export interface PropertyFilters {
   title: string;
-  category_id: number | null;
-  minPrice: number | null;
-  maxPrice: number | null;
-  minSize: number | null;
-  maxSize: number | null;
+  category_id?: number | null;
+  minPrice?: number | null;
+  maxPrice?: number | null;
+  minSize?: number | null;
+  maxSize?: number | null;
+  
+  // Paginación
+  page?: number;
+  pageSize?: number;
 }
